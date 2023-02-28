@@ -1,51 +1,54 @@
 <?php
 
 declare(strict_types=1);
-// header('Content-type:application/json;charset=utf-8');
+header('Content-type:application/json;charset=utf-8');
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Headers: *");
 header('Content-Type: application/json');
+
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     include 'gate.php';
-    if (isset($_GET['login'])) {
-        $username = (string) $_GET['email'];
-        $password = (string) $_GET['password'];
-        login($username, $password);
-    } elseif (isset($_GET['dashboardTop'])) {
-        dashboard();
-    } elseif (isset($_GET['addCenter'])) {
-        centre($_GET);
-    } elseif (isset($_GET['getCenters'])) {
-        centreAll();
-    } elseif (isset($_GET['creatUser'])) {
-        createUser($_GET);
-    } elseif (isset($_GET['creatUserAssistant'])) {
-        createUserAssitant($_GET);
-    } elseif (isset($_GET['allAdmins'])) {
-        allAdmin();
-    } elseif (isset($_GET['allStudent'])) {
-        allStudent();
-    } elseif (isset($_GET['specificStudent'])) {
-        specificStudent($_GET['id']);
-    } elseif (isset($_GET['createStudent'])) {
-        createStudent($_GET);
-    } elseif (isset($_GET['getStudentMetrics'])) {
-        studentMetrics($_GET['id']);
-    } elseif (isset($_GET['getStudentPerformance'])) {
-        studentPerformance($_GET['id'], $_GET['subject']);
-    } elseif (isset($_GET['getCenterMetrix'])) {
-        centerDetailTop($_GET['id']);
-    } elseif (isset($_GET['getCenterInfo'])) {
-        centerInfo($_GET['id']);
-    } elseif (isset($_GET['getAllStudentSpecificCentre'])) {
-        getAllStudentSpecificCentre($_GET['id']);
-    }
+   if (isset($_GET['childrenService'])) {
+    childrenService($_GET);
+    } elseif (isset($_GET['updateChildrenService'])) {
+    updateChildrenService($_GET);
+    }  elseif (isset($_GET['getAllProjects'])) {
+    getAllProjects($_GET);
+    } elseif (isset($_GET['editSingleProjects'])) {
+    editSingleProjects($_GET['id']);
+    } elseif (isset($_GET['getAllBlogs'])) {
+    getAllBlogs($_GET['id']);
+    } elseif (isset($_GET['editSingleBlogs'])) {
+    editSingleBlogs($_GET['id']);
+    }  elseif (isset($_GET['getAllEvents'])) {
+    getAllEvents($_GET['id']);
+    } elseif (isset($_GET['editSingleEvents'])) {
+    editSingleEvents($_GET['id']);
+    } 
 } elseif ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    include 'sort.php';
-    // if (isset($_GET['practice'])) {
-    //     // session_start();
-    //     // print_r($_GET);
-    //     $data = $_GET;
-    //     practice($data);
-    // }
+    include 'gate.php';
+    $entityBody = file_get_contents('php://input');
+    // price_update_add($entityBody);
+    if (!empty($entityBody)) {
+        $data = (array) json_decode($entityBody);
+        if ($data['endpoint'] == "ourProjects") {
+            ourProjects($data['data']);
+        } elseif ($data['endpoint'] == "ourBlogs") {
+            ourBlogs($data['data']);
+        }  elseif ($data['endpoint'] == "ourEvents") {
+            ourEvents($data['data']);
+        }  elseif ($data['endpoint'] == "contactUs") {
+            contactUs($data['data']);
+        } 
+    }
+} elseif ($_SERVER['REQUEST_METHOD'] == 'PUT') {
+    include 'gate.php';
+    $entityBody = file_get_contents('php://input');
+    // price_update_add($entityBody);
+    if (!empty($entityBody)) {
+        $data = (array) json_decode($entityBody);
+        if ($data['endpoint'] == "UpdateHotelHostType") {
+           // updateHotelHostType($data['data']);
+        } 
+    }
 }
