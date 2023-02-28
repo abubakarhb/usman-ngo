@@ -265,3 +265,59 @@ function contactUs($data)
         exit(json_encode($error_creating));
     }
 }
+function aboutUs($data)
+{
+    include "config/index.php";
+    $image = $data->image;
+    $title = $data->title;
+    $content = $data->content;
+
+    // print_r($image); die;
+
+    $query = sprintf("INSERT INTO `about_us`(`image`, `title`, `content`) VALUES('$image','$title','$content')");
+    //    print_r($query);die;
+    $User_re = mysqli_query($usman_ngo, $query) or die(mysqli_error($usman_ngo));
+
+    if ($User_re) {
+        $arr = ["status" => 1, "message" => "Contact Us Saved"];
+        exit(json_encode($arr));
+    } else {
+        $error_creating = ["Error" => "Invalid operation"];
+        exit(json_encode($error_creating));
+    }
+}
+
+function UpdateaboutUs($data)
+{
+   
+    include "config/index.php";
+    $id = $data->id;
+    $image = $data->image;
+    $title = $data->title;
+    $content = $data->content;
+
+    //    print_r($content); die;
+
+    $row22 = "SELECT * FROM `about_us` WHERE `id`= '{$id}'";
+    $result22 = mysqli_query($usman_ngo, $row22) or die(mysqli_error($usman_ngo));
+    $row11 = mysqli_fetch_assoc($result22);
+   
+
+    if ($row11 > 1) {
+        $query =  "UPDATE `about_us` SET `image` = '{$image}',`title` = '{$title}',`content` = '{$content}' WHERE `id` = '{$id}'";
+
+        //   print_r($query);die;
+        $User_re = mysqli_query($usman_ngo, $query) or die(mysqli_error($usman_ngo));
+
+        if ($User_re) {
+            $arr = ["status" => 1, "message" => "about us Successfully Updated "];
+            exit(json_encode($arr));
+        } else {
+            $error_creating = ["Error" => "Invalid operation"];
+            exit(json_encode($error_creating));
+        }
+    } else {
+        $error_creating = ["Error" => "No Data for this Record"];
+        exit(json_encode($error_creating));
+    }
+}

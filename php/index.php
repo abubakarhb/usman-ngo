@@ -39,6 +39,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             ourEvents($data['data']);
         }  elseif ($data['endpoint'] == "contactUs") {
             contactUs($data['data']);
+        } elseif ($data['endpoint'] == "aboutUs") {
+            aboutUs($data['data']);
         } 
     }
 } elseif ($_SERVER['REQUEST_METHOD'] == 'PUT') {
@@ -47,8 +49,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     // price_update_add($entityBody);
     if (!empty($entityBody)) {
         $data = (array) json_decode($entityBody);
-        if ($data['endpoint'] == "UpdateHotelHostType") {
-           // updateHotelHostType($data['data']);
+        if ($data['endpoint'] == "UpdateaboutUs") {
+           UpdateaboutUs($data['data']);
         } 
     }
 }
