@@ -24,6 +24,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     getAllEvents($_GET['id']);
     } elseif (isset($_GET['editSingleEvents'])) {
     editSingleEvents($_GET['id']);
+    }  elseif (isset($_GET['getblogComment'])) {
+    getblogComment($_GET['id']);
     } 
 } elseif ($_SERVER['REQUEST_METHOD'] == 'POST') {
     include 'gate.php';
@@ -41,6 +43,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             contactUs($data['data']);
         } elseif ($data['endpoint'] == "aboutUs") {
             aboutUs($data['data']);
+        } elseif ($data['endpoint'] == "blogComment") {
+            blogComment($data['data']);
         } 
     }
 } elseif ($_SERVER['REQUEST_METHOD'] == 'PUT') {

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Feb 28, 2023 at 07:16 PM
+-- Generation Time: Mar 01, 2023 at 02:03 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.1.6
 
@@ -40,7 +40,8 @@ CREATE TABLE `about_us` (
 --
 
 INSERT INTO `about_us` (`id`, `image`, `title`, `content`, `created_at`) VALUES
-(1, 'lolo2x.jpg', 'Welcome to Welfare Stablished Since 1898', 'The Big Oxmox advised her not to do so, because there were thousands of bad Commas, wild Question Marks and devious Semikoli, but the Little Blind Text didn’t listen.', '2023-02-28 18:05:14');
+(1, 'Text.jpg', 'Welcome to Welfare Stablished Since 1898', 'The Big Oxmox advised her not to do so, because there were thousands of bad Commas, wild Question Marks and devious Semikoli, but the Little Blind Text didn’t listen.', '2023-02-28 18:05:14'),
+(2, 'Text2.jpg', 'Welcome to Welfare Stablished Since 1898', 'The Big Oxmox advised her not to do so, because there were thousands of bad Commas, wild Question Marks and devious Semikoli, but the Little Blind Text didn’t listen.', '2023-02-28 21:05:17');
 
 -- --------------------------------------------------------
 
@@ -64,7 +65,33 @@ CREATE TABLE `blog` (
 
 INSERT INTO `blog` (`id`, `author`, `image`, `header`, `description`, `created_at`, `updated_at`) VALUES
 (1, 'Admin', 'lolo.jpg', 'Hurricane Irma has devastated Florida', 'A small river named Duden flows by their place and supplies it with the necessary regelialia.', '2023-02-28 16:40:15', '2023-02-28 16:40:15'),
-(2, 'Admin', 'lolo.jpg', 'Hurricane Irma has devastated Florida', 'A small river named Duden flows by their place and supplies it with the necessary regelialia.', '2023-02-28 16:40:42', '2023-02-28 16:40:42');
+(2, 'Admin', 'lolo.jpg', 'Hurricane Irma has devastated Florida', 'A small river named Duden flows by their place and supplies it with the necessary regelialia.', '2023-02-28 16:40:42', '2023-02-28 16:40:42'),
+(3, 'Text', 'Text', 'string', 'string', '2023-02-28 20:53:56', '2023-02-28 20:53:56'),
+(4, '', '', '', '', '2023-02-28 21:04:15', '2023-02-28 21:04:15');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `blog_commenets`
+--
+
+CREATE TABLE `blog_commenets` (
+  `id` int(11) NOT NULL,
+  `blog_id` int(11) NOT NULL,
+  `name` varchar(200) NOT NULL,
+  `email` varchar(200) NOT NULL,
+  `website` varchar(300) DEFAULT NULL,
+  `message` text NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `blog_commenets`
+--
+
+INSERT INTO `blog_commenets` (`id`, `blog_id`, `name`, `email`, `website`, `message`, `created_at`, `updated_at`) VALUES
+(1, 1, 'Text', 'string@gmail.com', 'string.com', 'string', '2023-03-01 12:57:19', '2023-03-01 12:57:19');
 
 -- --------------------------------------------------------
 
@@ -113,7 +140,8 @@ CREATE TABLE `event2` (
 
 INSERT INTO `event2` (`id`, `image`, `organizer`, `header`, `description`, `date`, `time_from`, `time_to`, `location`) VALUES
 (1, 'txt.jpg', 'Admin', 'World Wide Donation', 'A small river named Duden flows by their place and supplies it with the necessary regelialia.', '2023-03-01', '10:10:22', '13:12:22', 'Main Campus'),
-(2, 'lolo.jpg', 'Admin', 'Hurricane Irma has devastated Florida', 'A small river named Duden flows by their place and supplies it with the necessary regelialia.', '2023-03-01', '10:10:22', '13:12:22', 'Minna');
+(2, 'lolo.jpg', 'Admin', 'Hurricane Irma has devastated Florida', 'A small river named Duden flows by their place and supplies it with the necessary regelialia.', '2023-03-01', '10:10:22', '13:12:22', 'Minna'),
+(3, 'Text', 'Text', 'string', 'string', '2023-03-01', '10:10:22', '13:12:22', 'string');
 
 -- --------------------------------------------------------
 
@@ -150,7 +178,8 @@ CREATE TABLE `projects` (
 
 INSERT INTO `projects` (`id`, `img`, `header`, `description`, `total_donation`, `amount_donated`, `created_at`, `updated_at`) VALUES
 (1, 'lolo.jpg', 'individual or corporate body in Akwaibom,', 'remittances to the Akwaibom government has been made easy…', 300, 100, '2023-02-28 16:19:02', '2023-02-28 16:19:02'),
-(2, 'lolo.jpg', 'Clean water for the urban area', 'Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life', 30000, 12000, '2023-02-28 16:25:33', '2023-02-28 16:25:33');
+(2, 'lolo.jpg', 'Clean water for the urban area', 'Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life', 30000, 12000, '2023-02-28 16:25:33', '2023-02-28 16:25:33'),
+(3, 'Text', 'Text', 'string', 30000, 10000, '2023-02-28 20:49:24', '2023-02-28 20:49:24');
 
 -- --------------------------------------------------------
 
@@ -170,7 +199,7 @@ CREATE TABLE `services` (
 --
 
 INSERT INTO `services` (`id`, `people_number`, `created_at`, `updated_at`) VALUES
-(1, '1000', '2023-02-28 13:29:47', '2023-02-28 16:06:43');
+(1, '10000', '2023-02-28 13:29:47', '2023-02-28 20:46:22');
 
 --
 -- Indexes for dumped tables
@@ -186,6 +215,12 @@ ALTER TABLE `about_us`
 -- Indexes for table `blog`
 --
 ALTER TABLE `blog`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `blog_commenets`
+--
+ALTER TABLE `blog_commenets`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -226,13 +261,19 @@ ALTER TABLE `services`
 -- AUTO_INCREMENT for table `about_us`
 --
 ALTER TABLE `about_us`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `blog`
 --
 ALTER TABLE `blog`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `blog_commenets`
+--
+ALTER TABLE `blog_commenets`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `contact_us`
@@ -244,7 +285,7 @@ ALTER TABLE `contact_us`
 -- AUTO_INCREMENT for table `event2`
 --
 ALTER TABLE `event2`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `gallery`
@@ -256,7 +297,7 @@ ALTER TABLE `gallery`
 -- AUTO_INCREMENT for table `projects`
 --
 ALTER TABLE `projects`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `services`

@@ -279,7 +279,7 @@ function aboutUs($data)
     $User_re = mysqli_query($usman_ngo, $query) or die(mysqli_error($usman_ngo));
 
     if ($User_re) {
-        $arr = ["status" => 1, "message" => "Contact Us Saved"];
+        $arr = ["status" => 1, "message" => "About Us Saved"];
         exit(json_encode($arr));
     } else {
         $error_creating = ["Error" => "Invalid operation"];
@@ -320,4 +320,33 @@ function UpdateaboutUs($data)
         $error_creating = ["Error" => "No Data for this Record"];
         exit(json_encode($error_creating));
     }
+}
+
+function blogComment($data)
+{
+    include "config/index.php";
+    $blog_id = $data->blog_id;
+    $name = $data->name;
+    $email = $data->email;
+    $website = $data->website;
+    $message = $data->message;
+
+    // print_r($message); die;
+
+    $query = sprintf("INSERT INTO `blog_commenets`(`blog_id`, `name`, `email`, `website`, `message`) VALUES ('$blog_id','$name','$email','$website','$message')");
+    //    print_r($query);die;
+    $User_re = mysqli_query($usman_ngo, $query) or die(mysqli_error($usman_ngo));
+
+    if ($User_re) {
+        $arr = ["status" => 1, "message" => "Comment send Us Saved"];
+        exit(json_encode($arr));
+    } else {
+        $error_creating = ["Error" => "Invalid operation"];
+        exit(json_encode($error_creating));
+    }
+}
+function getblogComment()
+{
+    $pull_data = check_db_query_staus1("SELECT * FROM `blog_commenets` ORDER BY id DESC ", "CHK");
+    exit(json_encode($pull_data));
 }
